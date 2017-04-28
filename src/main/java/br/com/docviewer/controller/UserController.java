@@ -1,6 +1,8 @@
 package br.com.docviewer.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,6 +53,15 @@ public class UserController {
 			ex.printStackTrace();
 		}
 		return null;
+	}
+	
+	@RequestMapping(method=RequestMethod.GET,value="/findAllUsers",headers="Accept=application/json")
+	public @ResponseBody List<User> getAllUsers() throws Exception{
+		try{
+			return repositoryUser.getAll();
+		}catch(Exception ex){
+			throw new Exception("Houve um problema ao carregar os usuários. Tente novamente mais tarde");
+		}
 	}
 	
 	private HttpHeaders getHeaders(){

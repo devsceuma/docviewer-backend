@@ -1,5 +1,7 @@
 package br.com.docviewer.repository;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -37,6 +39,11 @@ public class UserRepositoryImpl implements UserRepository {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("username").is(username).and("password").is(CryptUtil.ConvertToMD5(password)));
 		return mongoTemplate.findOne(query, User.class);
+	}
+
+	@Override
+	public List<User> getAll() throws Exception {
+		return mongoTemplate.findAll(User.class);
 	}
 
 }

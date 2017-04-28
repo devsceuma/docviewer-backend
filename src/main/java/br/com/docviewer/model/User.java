@@ -1,5 +1,7 @@
 package br.com.docviewer.model;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -13,6 +15,9 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
+	private String organization;
+	private String job;
+	private List<Project> projects;
 
 	public User() {
 	
@@ -31,6 +36,14 @@ public class User {
 	}
 	
 	
+	
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+	
+	public List<Project> getProjects() {
+		return projects;
+	}
 
 	public String getId() {
 		return id;
@@ -50,6 +63,43 @@ public class User {
 
 	public String getEmail() {
 		return email;
+	}
+
+	
+	public String getOrganization() {
+		return organization;
+	}
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setOrganization(String organization) {
+		this.organization = organization;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
 	}
 
 	@Override

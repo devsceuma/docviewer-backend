@@ -18,7 +18,16 @@ public class UserRepositoryImpl implements UserRepository {
 	
 	@Override
 	public void save(User user) throws Exception {
-		mongoTemplate.save(user);
+		user.setPassword(CryptUtil.ConvertToMD5(user.getPassword()));
+		Query query = new Query();
+		query.addCriteria(Criteria.where("username").is(user.getUsername()).and("password").is(user.getPassword()));
+		User recoveredUser = mongoTemplate.findOne(query, User.class);
+		
+		if(recoveredUser == null){
+			mongoTemplate.save(user);
+		}else{
+			throw new Exception("Usuário já existe na base de dados");
+		}
 
 		
 	}

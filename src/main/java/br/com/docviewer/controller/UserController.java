@@ -31,14 +31,13 @@ public class UserController {
 	private UserRepository repositoryUser;
 	
 	@RequestMapping(method=RequestMethod.POST,value="/save", consumes={"application/json"})
-	public ResponseEntity<User> save(@Valid @RequestBody User user){
+	public ResponseEntity<User> save(@Valid @RequestBody User user) throws Exception{
 		try{
 			repositoryUser.save(user);
 			return new ResponseEntity<User>(user, getHeaders(),HttpStatus.CREATED);
 		}catch(Exception ex){
-			ex.printStackTrace();
+			throw new Exception("Usuário já existe na base de dados");
 		}
-		return null;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/login",headers="Accept=application/json")

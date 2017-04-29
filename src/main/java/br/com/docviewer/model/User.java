@@ -1,5 +1,6 @@
 package br.com.docviewer.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -17,6 +18,7 @@ public class User {
 	private String email;
 	private String organization;
 	private String job;
+	private String profile;
 	private List<Project> projects;
 
 	public User() {
@@ -35,7 +37,13 @@ public class User {
 		this.password = password;
 	}
 	
+	public void setPerfil(String profile) {
+		this.profile = profile;
+	}
 	
+	public String getPerfil() {
+		return profile;
+	}
 	
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
@@ -101,7 +109,7 @@ public class User {
 	public void setJob(String job) {
 		this.job = job;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", username=" + username

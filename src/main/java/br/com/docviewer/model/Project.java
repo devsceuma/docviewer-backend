@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Project {
 
 	@Id
-	private Integer id;
+	private String id;
 	
 	private String url;
 	private String name;
@@ -19,6 +19,18 @@ public class Project {
 	public Project(String url, String name) {
 		this.url = url;
 		this.name = name;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public String getUrl() {
+		return url;
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 	

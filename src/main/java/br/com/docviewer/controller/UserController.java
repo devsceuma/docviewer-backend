@@ -36,7 +36,7 @@ public class UserController {
 	public ResponseEntity<User> save(@Valid @RequestBody User user) throws Exception{
 		try{
 			repositoryUser.save(user);
-			return new ResponseEntity<User>(user, getHeaders(),HttpStatus.CREATED);
+			return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		}catch(Exception ex){
 			throw new Exception("Usuário já existe na base de dados");
 		}
@@ -64,6 +64,27 @@ public class UserController {
 		}
 	}
 	
+	@RequestMapping(method=RequestMethod.POST,value="/remove", consumes={"application/json"})
+	public <T> ResponseEntity<T> remove(@Valid @RequestBody User user) throws Exception{
+		try{
+			repositoryUser.delete(user);
+			return new ResponseEntity<T>(HttpStatus.CREATED);
+		}catch(Exception ex){
+			throw new Exception(ex.getMessage());
+		}
+	}
+	
+	@RequestMapping(method=RequestMethod.POST,value="/update", consumes={"application/json"})
+	public <T> ResponseEntity<T> update(@Valid @RequestBody User user) throws Exception{
+		try{
+			
+			repositoryUser.update(user);
+			return new ResponseEntity<T>(HttpStatus.CREATED);
+		}catch(Exception ex){
+			throw new Exception(ex.getMessage());
+		}
+	}
+/*	
 	private HttpHeaders getHeaders(){
         HttpHeaders headers = new HttpHeaders();
         headers.add("Access-Control-Allow-Origin", "*");
@@ -72,5 +93,5 @@ public class UserController {
         headers.add("Access-Control-Allow-Headers","Origin, Content-Type, X-Auth-Token");
         headers.add("content-type","application/json;charset=utf-8;text/plain");
         return headers;
-    }
+    }*/
 }

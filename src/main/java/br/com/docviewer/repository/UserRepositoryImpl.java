@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import br.com.docviewer.CryptUtil;
@@ -14,7 +15,6 @@ import br.com.docviewer.model.User;
 @Repository
 public class UserRepositoryImpl implements UserRepository {
 
-	
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
@@ -44,6 +44,38 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public List<User> getAll() throws Exception {
 		return mongoTemplate.findAll(User.class);
+	}
+
+	@Override
+	public void delete(User user) throws Exception {
+		try{
+			mongoTemplate.remove(user);
+		}catch(Exception ex){
+			throw new Exception("Falha ao deletar usuário, tente novamente mais tarde");
+		}
+		
+	}
+
+	@Override
+	public void update(User user) throws Exception {
+		try{
+			Query query = new Query();
+			query.addCriteria(Criteria
+			.where("id").is(user.getId()));
+			
+			Update update = new Update();
+			update.set("name", user.getName());
+			update.set("email", user.getEmail());
+			update.set("job", user.getJob());
+			update.set("organization", user.getOrganization());
+			update.set("password",user.getPassword());
+			update.set("projects", user.getProjects());
+			
+			mongoTemplate.updateFirst(query, update, User.class);
+		}catch(Exception ex){
+			throw new Exception("Falha ao atualizar o usuario "+user.getUsername());
+		}
+		
 	}
 
 }

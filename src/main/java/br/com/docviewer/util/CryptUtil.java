@@ -1,4 +1,4 @@
-package br.com.docviewer;
+package br.com.docviewer.util;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

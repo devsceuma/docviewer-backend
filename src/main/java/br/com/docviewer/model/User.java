@@ -1,24 +1,50 @@
 package br.com.docviewer.model;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
-@Document(collection="users")
+@Entity
+@Table(name="users")
 public class User {
 	
-	@Id
-	private String id;
+	@javax.persistence.Id
+	@Column(name="CODIGO")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
 	
+	@Column(name="NAME")
 	private String name;
+	
+	@Column(name="USERNAME",unique=true)
 	private String username;
+	
+	@Column(name="PASSOWRD")
 	private String password;
+	
+	@Column(name="EMAIL")
 	private String email;
+	
+	@Column(name="ORGANIZATION")
 	private String organization;
+	
+	@Column(name="JOB")
 	private String job;
+	
+	@Column(name="PROFILE")
 	private String profile;
+	
+	@ManyToMany(cascade= {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH,CascadeType.REMOVE})
+	@JoinTable(name="user_has_projects",joinColumns={@JoinColumn()}, inverseJoinColumns={@JoinColumn()})
 	private List<Project> projects;
 
 	public User() {
@@ -37,24 +63,20 @@ public class User {
 		this.password = password;
 	}
 	
-	public void setPerfil(String profile) {
-		this.profile = profile;
-	}
-	
-	public String getPerfil() {
+	public String getProfile() {
 		return profile;
 	}
-	
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
 	public void setProjects(List<Project> projects) {
 		this.projects = projects;
 	}
 	
 	public List<Project> getProjects() {
 		return projects;
-	}
-
-	public String getId() {
-		return id;
 	}
 
 	public String getName() {
@@ -82,9 +104,7 @@ public class User {
 		return job;
 	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
+
 
 	public void setName(String name) {
 		this.name = name;
@@ -109,7 +129,12 @@ public class User {
 	public void setJob(String job) {
 		this.job = job;
 	}
+
 	
+	public Serializable getId() {
+		return id;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", username=" + username

@@ -1,16 +1,39 @@
 package br.com.docviewer.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.io.Serializable;
+import java.util.List;
 
-@Document(collection="projects")
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.data.annotation.Id;
+
+@Entity
+@Table(name="projects")
 public class Project {
 
-	@Id
-	private String id;
+	@javax.persistence.Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="CODIGO")
+	private Integer id;
 	
+	@Column(name="URL")
 	private String url;
+	
+	@Column(name="NAME")
 	private String name;
+	
+	@ManyToMany(mappedBy="projects")
+	private List<User> user;
 	
 	public Project() {
 
@@ -21,10 +44,12 @@ public class Project {
 		this.name = name;
 	}
 	
-	public String getId() {
+	
+	
+	public Serializable getId() {
 		return id;
 	}
-	
+
 	public String getUrl() {
 		return url;
 	}

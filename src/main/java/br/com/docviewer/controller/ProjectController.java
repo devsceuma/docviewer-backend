@@ -1,13 +1,12 @@
 package br.com.docviewer.controller;
 
-import java.util.List;
 
 import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +22,6 @@ import br.com.doceasier.model.annotations.DocMethod;
 import br.com.doceasier.model.annotations.DocParam;
 import br.com.doceasier.model.annotations.EnableDocumentation;
 import br.com.docviewer.model.Project;
-import br.com.docviewer.repository.ProjectRepository;
 import br.com.docviewer.service.ProjectService;
 
 @RestController
@@ -31,7 +29,7 @@ import br.com.docviewer.service.ProjectService;
 @EnableDocumentation
 @CrossOrigin
 @DocClass(createdBy="Marcus Cartágenes",date="30/04/2017",description="Controller para requisições do Projeto",url="/project-api")
-@br.com.doceasier.model.annotations.Project(description="Backend do DocViewer",masterUrl="/",name="DocViewer Backend")
+@br.com.doceasier.model.annotations.Project(description="Backend do DocViewer",masterUrl="http://localhost:8080/docViewer",name="DocViewer Backend")
 public class ProjectController {
 	
 	@Autowired

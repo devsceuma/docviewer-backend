@@ -1,7 +1,5 @@
 package br.com.docviewer.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.docviewer.model.User;
-import br.com.docviewer.repository.UserRepository;
 import br.com.docviewer.service.UserService;
 
 @RestController

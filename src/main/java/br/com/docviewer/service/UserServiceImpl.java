@@ -1,8 +1,9 @@
 package br.com.docviewer.service;
 
 import java.io.Serializable;
-import java.util.List;
+import java.security.NoSuchAlgorithmException;
 
+import org.apache.tomcat.util.security.MD5Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User save(User entity) {
+		try {
+			entity.setPassword(CryptUtil.ConvertToMD5(entity.getPassword()));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 		return userRepository.save(entity);
 	}
 

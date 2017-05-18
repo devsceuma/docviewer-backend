@@ -17,10 +17,16 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
+	
+
 	@Override
 	public User save(User entity) {
 		try {
-			entity.setPassword(CryptUtil.ConvertToMD5(entity.getPassword()));
+			
+			if(entity.getPassword() != null && !entity.getPassword().isEmpty() && entity.getPassword().length() != CryptUtil.LENGTH_MD5_ENCRYPT){
+				entity.setPassword(CryptUtil.ConvertToMD5(entity.getPassword()));
+			}	
+			
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}

@@ -37,7 +37,11 @@ public class ProjectController {
 	
 	@RequestMapping(method=RequestMethod.POST,value="/save", consumes={"application/json"})
 	@DocMethod(createdBy="Marcus Cartágenes",date="30/03/2017",description="Método para salvar novo Projeto",onSucess=Project.class,typeRequest=TypeRequest.POST,url="/save")
-	public ResponseEntity<Project> save(@Valid @RequestBody @DocParam(description="Projeto populado para ser salvo",optional=false)Project project) throws Exception{
+	public ResponseEntity<Project> save(
+			@Valid 
+			@RequestBody 
+			@DocParam(description="Projeto populado para ser salvo",optional=false)
+			Project project) throws Exception{
 		try{
 			projectService.save(project);
 			return new ResponseEntity<Project>(project,HttpStatus.CREATED);

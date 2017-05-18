@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -17,7 +18,7 @@ import javax.persistence.Table;
 @Table(name="users")
 public class User {
 	
-	@javax.persistence.Id
+	@Id
 	@Column(name="CODIGO")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
